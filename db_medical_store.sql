@@ -789,7 +789,7 @@ go
 -------------------------------------------------------- fin Codes Login-----------------------------------------------------------
 
 ----------------------------------------------------Codes facture--------------------------------------------------------------------
-create procedure rechercher_facure
+/*create procedure rechercher_facure
 @code_facture nvarchar(50)
 as
 select        
@@ -811,7 +811,7 @@ from
 						 where t_facture.code_facture=@code_facture
 
 
-
+*/
 
 ------------------------------------------------ Codes stock -------------------------------------------
 
@@ -828,7 +828,20 @@ create table t_stock
 	stock_final decimal,
 	constraint pk_stock primary key(numero)
 )
-
+go----------------------------------------Debut insertion_stock-----------------------------------------
+create procedure inserer_stock
+@designation nvarchar(50),
+@stock_initial decimal,
+@qte_entree decimal,
+@qte_sortie decimal,
+@stock_final decimal
+as
+	insert into t_stock
+		(date_stock, designation,stock_initial,qte_entree,qte_sortie,stock_final)
+	values
+		(getdate(), @designation, @stock_initial, @qte_entree, @qte_sortie, @stock_final)
+go
+--------------------------Fin ajout stock informations -------------------------------------------------
 -------------------------- procedure rechercher_stock
 
 go
